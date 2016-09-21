@@ -1,0 +1,13 @@
+#!/bin/sh
+if [ $# -eq 0 ]; then
+	echo $PATH | sed 's/:/\n/g' | xargs -n1 -I{} find {} -type f -regex '.*ctl' | xargs -n1 -I{} basename {}
+elif [ $1 = '-v' ]; then
+	echo $PATH | sed 's/:/\n/g' | xargs -n1 -I{} find {} -type f -regex '.*ctl'
+else
+cat << EOF
+Usage: lsctl [OPTIONS...]
+List information about the *ctl commands.
+
+  -v   print absolute path
+EOF
+fi
